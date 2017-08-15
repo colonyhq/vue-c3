@@ -13,8 +13,6 @@
     props: ['handler'],
 
     mounted () {
-
-
       if (this.handler) {
         this.handler.$on(events.INIT, (options) => {
           // destroy existing?
@@ -38,6 +36,12 @@
         this.handler.$on(events.SELECT, (ids, indices, resetOthers) => {
           if (this.$chart) {
             this.$chart.select(ids, indices, resetOthers)
+          }
+        })
+
+        this.handler.$on(events.DESTROY, () => {
+          if (this.$chart) {
+            this.$chart.destroy();
           }
         })
       }
